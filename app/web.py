@@ -25,7 +25,7 @@ async def generate(
     resume: UploadFile = File(None)
 ):
     resume_path = None
-    #test
+    
     # ✅ Only save if an actual file was selected
     if resume is not None and resume.filename:
         resume_path = os.path.join(UPLOAD_DIR, resume.filename)

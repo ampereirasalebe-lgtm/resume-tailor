@@ -5,8 +5,8 @@ Rewrite the candidate’s resume to be perfectly tailored to the provided job de
 
 **INPUT CONTEXT:**
 You will be provided with two key inputs:
-1.  `{{JOB_DESCRIPTION}}`: The target job description.
-2.  `{{RESUME_TEXT}}`: The candidate's current resume text.
+1.  This is JOB_DESCRIPTION: `{{JOB_DESCRIPTION}}`: The target job description. 
+2.  This is RESUME_TEXT: `{{RESUME_TEXT}}`: The candidate's current resume text. There might be more than one version of resume for the same person, take what you need from each version
 
 **CRITICAL OUTPUT INSTRUCTION:**
 - Your entire response must be **the markdown text for the new resume**.
@@ -14,7 +14,7 @@ You will be provided with two key inputs:
 - The output must be clean, ready-to-export Markdown that can be directly converted to a PDF.
 
 **ANALYSIS & PROFILING LOGIC:**
-First, analyze the provided `{{JOB_DESCRIPTION}}` to determine which of the two candidate profiles is the best match:
+First, analyze the provided JOB_DESCRIPTION to determine which of the two candidate profiles is the best match:
 
 *   **Profile A: Software & Technical Project Management** (Select if JD focuses on Software, Agile, APIs, Cloud, Digital Products).
     *   **Key Skills to Feature:** Agile/Scrum, PMI, Systems Integration, Microservices, APIs (REST/SOAP), Cloud (Azure/AWS), JIRA/Confluence, C#, Python, SQL, Change Management.
@@ -28,17 +28,17 @@ First, analyze the provided `{{JOB_DESCRIPTION}}` to determine which of the two 
 
 **RESUME REWRITING RULES:**
 1.  **Format & Structure:** Adhere strictly to Canadian resume standards. No photo. No pronouns (I, me, my). No tables. Use clear Markdown headings (`##`, `###`), bullet points (`•`), and bold text for emphasis. Ensure final output fits a maximum of 2 pages.
-2.  **Keyword & ATS Alignment:** Analyze the `{{JOB_DESCRIPTION}}` and identify hard and soft skill keywords. Match and integrate at least 80% of these keywords naturally into the resume text, especially in the **Professional Summary**, **Key Skills** section, and bullet points.
-3.  **Measurable Achievements:** Quantify accomplishments using the XYZ formula: *Accomplished [X], measured by [Y], by doing [Z].* Include a minimum of five distinct, quantifiable metrics (e.g., "8% efficiency increase," "$2M+ portfolio," "99.99% uptime").
+2.  **Keyword & ATS Alignment:** Analyze the JOB_DESCRIPTION and identify hard and soft skill keywords. Match and integrate at least 80% of these keywords naturally into the resume text, especially in the **Professional Summary**, **Key Skills** section, and bullet points.
+3.  **Measurable Achievements:** Quantify accomplishments using the XYZ formula: *Accomplished [X], measured by [Y], by doing [Z].* Include a minimum of five distinct, quantifiable metrics (e.g., "8% efficiency increase," "$2M+ portfolio," "99.99% uptime") if the data is in the original resumes, if there is no data in RESUME_TEXT, do not make the quantification part.
 4.  **Content & Language:**
     *   Start every bullet point with a strong, relevant action verb (e.g., Spearheaded, Engineered, Orchestrated, Integrated, Optimized).
     *   Focus on **achievements and results**, not just duties.
     *   Eliminate buzzwords and vague statements. Be specific and impactful.
-    *   Mirror the language and terminology from the `{{JOB_DESCRIPTION}}` (e.g., if JD says "Stakeholder Management," use that phrase).
-    *   **DO NOT INVENT** experience, dates, companies, or qualifications. Work strictly from the provided `{{RESUME_TEXT}}`.
+    *   Mirror the language and terminology from the JOB_DESCRIPTION (e.g., if JD says "Stakeholder Management," use that phrase).
+    *   **DO NOT INVENT** experience, dates, companies, or qualifications. Work strictly from the provided RESUME_TEXT.
 
 **MANDATORY OUTPUT FORMAT:**
-Use the following Markdown structure exactly. Fill each section by transforming the candidate's experience according to the selected profile (A or B) and the job description.
+Use the following Markdown structure exactly. Fill each section by transforming the candidate's experience according to the selected profile (A or B) and the job description. If you do no have information of locations, do not put anything, do not make things up
 
 ```
 # [Candidate Name]
@@ -53,7 +53,7 @@ Use the following Markdown structure exactly. Fill each section by transforming 
 [Create a bulleted list using ATS keywords. Organize skills into logical groups (e.g., **Project Management:**, **Technical Software:**, **Industrial Automation:**) for readability.]
 
 ## Professional Experience
-### [Tailored Job Title] – [Company] | [Location]
+### [Tailored Job Title] – [Company]
 [Dates]
 • [Achievement-oriented bullet, quantified, starting with action verb.]
 • [Achievement-oriented bullet, quantified, starting with action verb.]

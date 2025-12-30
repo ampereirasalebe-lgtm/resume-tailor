@@ -9,7 +9,10 @@ from app.resume_parser import (
 )
 
 def run_pipeline(job_url, resume_pdf, company, role):
-    jd = load_job_description(job_url)
+    if ' ' in job_url:
+        jd=job_url.strip()
+    else:
+        jd = load_job_description(job_url)
     safe_company = company if company else "the organization"
     safe_role = role if role else "this role"
     if resume_pdf:
