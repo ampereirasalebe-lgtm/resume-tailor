@@ -10,6 +10,7 @@ RULES:
 - Do NOT invent experience
 - ATS-aligned language
 - Canadian business standards
+-Extract the company and the role from the job description
 
 FORMAT:
 # Name
