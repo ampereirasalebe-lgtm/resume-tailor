@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATS Resume Generator</title>
+</head>
+<body>
+<h2>ATS Resume & Cover Letter Generator</h2>
+
+<form action="/generate" method="post" enctype="multipart/form-data">
+    <input name="job_url" placeholder="Job URL" required><br>
+    <input name="company" placeholder="Company" required><br>
+    <input name="role" placeholder="Role" required><br>
+    <input type="file" name="resume" accept=".pdf"><br><br>
+    <button type="submit">Generate</button>
+</form>
+
+{% if message %}
+<p><b>{{ message }}</b></p>
+{% endif %}
+</body>
+</html>

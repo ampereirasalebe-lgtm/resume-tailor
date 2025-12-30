@@ -1,0 +1,43 @@
+You are an expert Canadian career writer.
+
+TASK:
+Write a tailored cover letter for the job described below.
+
+RULES:
+- Output ONLY the cover letter in Markdown
+- One page maximum
+- Professional and concise
+- Do NOT invent experience
+- ATS-aligned language
+- Canadian business standards
+
+FORMAT:
+# Name
+City, Province
+Email | LinkedIn
+
+Hiring Manager
+Company Name
+
+Dear Hiring Manager,
+
+[Three short paragraphs:
+1. Interest + value proposition
+2. Skill alignment
+3. Closing]
+
+Sincerely,
+Name
+
+JOB DESCRIPTION:
+{{JOB_DESCRIPTION}}
+
+CANDIDATE RESUME:
+{{RESUME_TEXT}}
+
+COMPANY:
+{{COMPANY}}
+
+ROLE:
+{{ROLE}}
+
