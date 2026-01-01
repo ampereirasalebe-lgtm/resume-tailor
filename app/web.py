@@ -1,7 +1,8 @@
-from fastapi import FastAPI, UploadFile, File, Form, Request
+from fastapi import FastAPI, UploadFile, File, Form, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from app.main import run_pipeline
+from app.jd_loader import load_job_description
 import shutil, os
 from typing import Optional
 
@@ -51,3 +52,23 @@ async def generate(
             "message": message
         }
     )
+
+@app.post("/scrape")
+async def scrape_only(
+    job_url: str = Form(...)
+):
+    try:
+        job_description = load_job_description(job_url)
+
+        if not job_description:
+            raise ValueError("Empty job description")
+
+        return {
+            "job_description": job_description
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Failed to scrape job URL: {str(e)}"
+        )
