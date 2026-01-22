@@ -2,6 +2,26 @@
 <html>
 <head>
     <title>ATS Resume Generator</title>
+    <script>
+        async function loadModels() {
+        try {
+            const res = await fetch("/models");
+            const data = await res.json();
+            const select = document.getElementById("model-select");
+
+            data.models.forEach(model => {
+            const option = document.createElement("option");
+            option.value = model;
+            option.textContent = model;
+            select.appendChild(option);
+            });
+        } catch (err) {
+            console.error("Failed to load models", err);
+        }
+        }
+
+        window.onload = loadModels;
+    </script>
 </head>
 <body>
 <h2>ATS Resume & Cover Letter Generator</h2>
@@ -11,6 +31,11 @@
     <input name="company" placeholder="Company"><br>
     <input name="role" placeholder="Role"><br>
     <input type="file" name="resume" accept=".pdf"><br><br>
+    <label for="model-select">Model</label><br>
+    <select name="model" id="model-select">
+        <option value="">Default</option>
+    </select>
+    <br><br>
     <button type="submit">Generate</button>
 </form>
 

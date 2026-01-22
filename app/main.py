@@ -1,4 +1,5 @@
 
+import os
 from app.jd_loader import load_job_description
 from app.ollama_client import generate
 from app.markdown_to_pdf import markdown_to_pdf
@@ -8,7 +9,7 @@ from app.resume_parser import (
     extract_resumes_from_folder
 )
 
-def run_pipeline(job_url, resume_pdf, company, role):
+def run_pipeline(job_url, resume_pdf, company, role, model=None):
     if ' ' in job_url:
         jd=job_url.strip()
     else:
@@ -27,13 +28,15 @@ def run_pipeline(job_url, resume_pdf, company, role):
         cover_prompt = f.read()
 
     resume_md = generate(
-        resume_prompt
+        model=model,
+        prompt=resume_prompt
         .replace("{{JOB_DESCRIPTION}}", jd)
         .replace("{{RESUME_TEXT}}", resume_text)
     )
 
     cover_md = generate(
-        cover_prompt
+        model=model,
+        prompt=cover_prompt
         .replace("{{JOB_DESCRIPTION}}", jd)
         .replace("{{RESUME_TEXT}}", resume_text)
         .replace("{{COMPANY}}", safe_company)
@@ -41,6 +44,10 @@ def run_pipeline(job_url, resume_pdf, company, role):
     )
 
     out_dir = create_output_folder()
+    """ resume_txt_path = out_dir / "Resume.txt" """
+    resume_txt_path = os.path.join(out_dir, "Resume.txt")
+    with open(resume_txt_path, "w", encoding="utf-8") as f:
+        f.write(resume_md)
     markdown_to_pdf(resume_md, f"{out_dir}/Resume.pdf")
     markdown_to_pdf(cover_md, f"{out_dir}/Cover_Letter.pdf")
 

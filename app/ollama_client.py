@@ -5,8 +5,11 @@ deepseek-r1:latest
 gpt-oss-safeguard:20b
 llama3.1:8b 
 """
-
-def generate(prompt, model="deepseek-r1:latest"):
+DEFAULT_MODEL = "deepseek-r1:latest"
+""" def generate(prompt, model="deepseek-r1:latest"): """
+def generate(prompt, model: str | None = None):
+    if model is None:
+        model = DEFAULT_MODEL
     r = requests.post(
         "http://localhost:11434/api/generate",
         json={"model": model, "prompt": prompt, "stream": False}
